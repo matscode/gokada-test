@@ -12,7 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install PHP Dependencies
-      run: composer install -q
+      run: |
+        composer update
+        composer install
     - name: Install and Build JS
       run: |
         npm i
