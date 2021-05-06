@@ -12,10 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install PHP Dependencies
-      run: |
-        composer -v
-        composer self-update
-        composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install -q
     - name: Install and Build JS
       run: |
         npm i
