@@ -98,7 +98,7 @@ export default function Delivery() {
                 },
                 (r, s) => {
                     if (s === google.maps.DirectionsStatus.OK) {
-                        map.fitBounds(ltb, { top: 190, bottom: 100 });
+                        map.fitBounds(ltb, { top: 200, bottom: 110 });
                         map.panToBounds(ltb);
 
                         directionRenderer.setOptions({
@@ -115,13 +115,6 @@ export default function Delivery() {
                     }
                 }
             );
-            // pathJoin.setOptions({
-            //     geodesic: true,
-            //     strokeColor: '#363',
-            //     strokeWidth: '1px'
-            // })
-            // pathJoin.setPath([ltb.getNorthEast(), ltb.getSouthWest()])
-            // pathJoin.setMap(map)
         }
     };
 
