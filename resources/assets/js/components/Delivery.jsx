@@ -98,7 +98,12 @@ export default function Delivery() {
                 },
                 (r, s) => {
                     if (s === google.maps.DirectionsStatus.OK) {
-                        map.fitBounds(ltb, { top: 200, bottom: 110 });
+                        map.fitBounds(ltb, {
+                            top: 195,
+                            bottom: 100,
+                            left: 10,
+                            right: 10
+                        });
                         map.panToBounds(ltb);
 
                         directionRenderer.setOptions({
@@ -175,28 +180,38 @@ export default function Delivery() {
 
             <section id="locationWrapper" className="p-3">
                 <div className="text-center text-capitalize d-flex justify-content-between align-items-center w-100">
-                    <a
-                        href="#"
-                        className="d-inline-flex align-items-center text-dark"
-                        onClick={e => {
-                            e.preventDefault();
-                            setCurrentFocus(null);
-                            setAddressResult([]);
-                        }}
-                    >
-                        <FI icon="chevron-left" className="bg-transparent"></FI>
-                        Back
-                    </a>
+                    {currentFocus && (
+                        <a
+                            href="#"
+                            className="d-inline-flex align-items-center text-dark"
+                            onClick={e => {
+                                e.preventDefault();
+                                setCurrentFocus(null);
+                                setAddressResult([]);
+                            }}
+                        >
+                            <FI
+                                icon="chevron-left"
+                                className="bg-transparent"
+                            ></FI>
+                            Back
+                        </a>
+                    )}
 
-                    <h5 className="m-0">{currentFocus || "Parcel request"}</h5>
+                    <h5 className="m-0 flex-grow-1 text-center">{currentFocus || "Parcel request"}</h5>
 
-                    <a
-                        href="#"
-                        className="d-inline-flex align-items-center text-dark invisible"
-                    >
-                        <FI icon="chevron-left" className="bg-transparent"></FI>
-                        Back
-                    </a>
+                    {currentFocus && (
+                        <a
+                            href="#"
+                            className="d-inline-flex align-items-center text-dark invisible"
+                        >
+                            <FI
+                                icon="chevron-left"
+                                className="bg-transparent"
+                            ></FI>
+                            Back
+                        </a>
+                    )}
                 </div>
 
                 <section className="locationInputFields">
@@ -247,7 +262,9 @@ export default function Delivery() {
                             <a
                                 href="#"
                                 onClick={e =>
-                                    alert('Please, select location from your search result')
+                                    alert(
+                                        "Please, select location from your search result"
+                                    )
                                 }
                                 disabled
                                 className="d-block address-item flex-grow-1"
