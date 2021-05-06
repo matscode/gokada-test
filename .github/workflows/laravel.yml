@@ -1,0 +1,31 @@
+name: Laravel
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install PHP Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
+    - name: Install and Build JS
+      run: |
+        npm i
+        npm run prod
+    - name: Directory Permissions
+      run: |
+        chmod -R 777 storage bootstrap/cache
+        chmod -R 777 storage/*
+    - name: SCP Files
+      uses: appleboy/scp-action@v0.1.1
+      with:
+        host: ${{ secrets.SERVER }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.KEY }}
+        source: "."
+        target: "~/stack/htdocs/"
